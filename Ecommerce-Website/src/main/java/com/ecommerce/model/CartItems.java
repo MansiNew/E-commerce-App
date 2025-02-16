@@ -1,0 +1,31 @@
+package com.ecommerce.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class CartItems {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long cartItemId;
+	// not need this cart data in UI
+	@ManyToOne
+	@JsonIgnore
+	private Cart cart;
+	private Integer quantity;
+	private String size;
+	private Double sellingPrice;
+	private Double mrpPrice;
+	@OneToOne
+	private Product product;
+	private Long userId;
+}
