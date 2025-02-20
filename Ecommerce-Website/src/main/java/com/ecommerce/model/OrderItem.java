@@ -1,30 +1,23 @@
 package com.ecommerce.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
 @Entity
 @Data
-public class Category {
+public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long categId;
-	private String name;
-	@NotNull
-	@Column(unique = true)
-	private String categoryId;
+	private Long orderItemId;
 	@ManyToOne
-	private Category parentCategory;
-	@NotNull
-	private Integer level;
-
+	private Order order;
 }

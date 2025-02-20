@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import javax.persistence.CascadeType;
 
 import lombok.Data;
 
@@ -34,6 +38,9 @@ public class Product {
 	private Category category;
 	@ManyToOne
 	private Seller seller;
-	private LocalDate createdDate;
+	private LocalDateTime createdDate;
+	private String sizes;
+	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Review> reviews=new ArrayList<>();
 
 }

@@ -27,5 +27,5 @@ public class CartItems {
 	private Double mrpPrice;
 	@OneToOne
 	private Product product;
-	private Long userId;
+	//private Long userId;
 }

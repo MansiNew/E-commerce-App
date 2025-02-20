@@ -67,6 +67,10 @@
 			<version>1.6.15</version> <!-- Use the latest 1.6.x version -->
 		</dependency>
 		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
