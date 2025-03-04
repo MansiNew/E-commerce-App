@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -19,5 +21,13 @@ public class OrderItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long orderItemId;
 	@ManyToOne
+	@JsonIgnore
 	private Order order;
+	@ManyToOne
+	private Product product;
+	private Integer quantity;
+	private Double mrpPrice;
+	private Double sellingPrice;
+	private String size;
+	private Long userId;
 }
