@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class CartItems {
+public class CartItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long cartItemId;
@@ -25,7 +25,7 @@ public class CartItems {
 	private String size;
 	private Double sellingPrice;
 	private Double mrpPrice;
-	@OneToOne
+	@ManyToOne
 	private Product product;
 	//private Long userId;
 }

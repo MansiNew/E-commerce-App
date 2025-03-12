@@ -36,6 +36,6 @@ public class Cart {
 	// remove from set also
 
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<CartItems> cartItems = new HashSet<>();
+	private Set<CartItem> cartItems = new HashSet<>();
 
 }

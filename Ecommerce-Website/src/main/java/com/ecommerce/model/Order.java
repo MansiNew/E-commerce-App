@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,7 +45,8 @@ public class Order {
 	private Integer totalItem;
 	private OrderStatus orderStatus;
 	//@Enumerated(EnumType.STRING)
-	//private PaymentStatus paymentStatus=PaymentStatus.PENDING;
+	//@Column(name = "payment_status", insertable = false, updatable = false)
+	private PaymentStatus orderPaymentStatus=PaymentStatus.PENDING;
 
 	private LocalDateTime orderDate=LocalDateTime.now();
 	private LocalDateTime deliveredDate=orderDate.plusDays(7);
