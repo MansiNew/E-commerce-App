@@ -3,6 +3,7 @@ package com.ecommerce.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,10 @@ public class User {
 	private Long userId;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	@Column(unique=true)
 	private String emailId;
 	private String firstName;
-	private String lastNmae;
+	private String lastName;
 	private String mobileNo;
 	private USER_ROLE userRole=USER_ROLE.ROLE_CUSTOMER;
 	@OneToMany
