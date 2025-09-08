@@ -115,7 +115,7 @@ public class AuthServiceImpl implements AuthService {
 	 */
 	@Override
 	public AuthResponse userSignin(LoginRequest request) {
-		Authentication authentication = authenticateUse(request.getEmail(), request.getOtp());
+		Authentication authentication = authenticateUser(request.getEmail(), request.getOtp());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		AuthResponse response = new AuthResponse();
 		String jwtToken = jwtProvider.generateToken(authentication);
@@ -134,7 +134,7 @@ public class AuthServiceImpl implements AuthService {
 	/*
 	 * Verify otp ,if otp is valid then it will return authentication
 	 */
-	private Authentication authenticateUse(String email, String otp) {
+	private Authentication authenticateUser(String email, String otp) {
 		// TODO Auto-generated method stub
 		UserDetails userDetails = customerService.loadUserByUsername(email);
 		if (userDetails == null) {
