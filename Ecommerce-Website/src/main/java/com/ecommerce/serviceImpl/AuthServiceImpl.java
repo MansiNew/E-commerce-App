@@ -26,12 +26,12 @@ import com.ecommerce.request.LoginRequest;
 import com.ecommerce.request.SignUpRequest;
 import com.ecommerce.response.AuthResponse;
 import com.ecommerce.service.AuthService;
-import com.ecommerce.service.CartRepository;
+import com.ecommerce.repo.CartRepository;
 import com.ecommerce.utility.LoginConstants;
 import com.ecommerce.utility.OtpUtil;
 
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bytecode.constant.LongConstant;
+
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +45,7 @@ public class AuthServiceImpl implements AuthService {
 	private final EmailService emailService;
 	private final CustomerServiceImpl customerService;;
 	private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
+
 	/*
 	 * Creates a new user.
 	 * 
@@ -88,20 +89,20 @@ public class AuthServiceImpl implements AuthService {
 	public void sendLoginOtp(String email) throws Exception {
 		if (email.startsWith(LoginConstants.SIGNING_PREFIX)) {
 			email = email.substring(LoginConstants.SIGNING_PREFIX.length());
-			VerificationCode verificationCode = verificcationCodeRepository.findByEmail(email);
-			if (verificationCode != null) {
-				verificcationCodeRepository.delete(verificationCode);
-			}
 		}
-		/*
-		 * otp genration logic
-		 */
+		VerificationCode existingVerificationCode = verificcationCodeRepository.findByEmail(email);
+		
+		if (existingVerificationCode != null) {
+			verificcationCodeRepository.delete(existingVerificationCode);
+		}
+
 		String otp = OtpUtil.generateOtp();
-		VerificationCode verificationCode = new VerificationCode();
-		verificationCode.setEmail(email);
-		verificationCode.setOtp(otp);
-		verificcationCodeRepository.save(verificationCode);
-//sent email
+		VerificationCode newVerificationCode= new VerificationCode();
+		newVerificationCode.setEmail(email);
+		newVerificationCode.setOtp(otp);
+		verificcationCodeRepository.save(newVerificationCode);
+
+		//sent email
 		String subject = "Login Otp Send";
 		String text = "send otp on email" + "  " + otp;
 		emailService.sendVerificationOtpEmail(email, otp, subject, text);
@@ -143,7 +144,7 @@ public class AuthServiceImpl implements AuthService {
 		if (verificationCode == null || !verificationCode.getOtp().equals(otp)) {
 			throw new BadCredentialsException("Wrong otp");
 		}
-		return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 	}
 
 }

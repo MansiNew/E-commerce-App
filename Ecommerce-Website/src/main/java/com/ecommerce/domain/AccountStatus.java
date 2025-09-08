@@ -1,5 +1,5 @@
 package com.ecommerce.domain;
 
-public enum ACCOUNT_STATUS {
+public enum AccountStatus {
 	PENDING_VERIFICATION, CLOSED, BANNED, ACTIVE, DEACTIVATED
 }

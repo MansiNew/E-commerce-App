@@ -1,7 +1,6 @@
 package com.ecommerce.model;
 
-import javax.persistence.Embeddable;
-
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 @Data

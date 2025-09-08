@@ -29,43 +29,42 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 	private final UserRepository userRepository;
 	private final AuthServiceImpl authService;
+
 	@PostMapping("/signup")
-public ResponseEntity<AuthResponse> createUserHandler(@RequestBody SignUpRequest request) throws Exception{
-		
-	String jwtToken = authService.createUserHandler(request);
-	System.out.println("JWT TOKE"+   jwtToken);
-	AuthResponse response=new AuthResponse();
-	response.setMessage("user created successfully");
-	response.setRole(USER_ROLE.ROLE_CUSTOMER);
-	response.setJwtToken(jwtToken);
-	return ResponseEntity.ok(response);
-		//return ResponseEntity.ok(request);
-}
+	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody SignUpRequest request) throws Exception {
+
+		String jwtToken = authService.createUserHandler(request);
+		AuthResponse response = new AuthResponse();
+		response.setMessage("user created successfully");
+		response.setRole(USER_ROLE.ROLE_CUSTOMER);
+		response.setJwtToken(jwtToken);
+		return ResponseEntity.ok(response);
+
+	}
+
 	@PostMapping("/sent-otp")
-	public ResponseEntity<SendOtpResponse> sendOtpHandler(@RequestBody VerificationOtpRequest request) throws Exception{
-	authService.sendLoginOtp(request.getEmail());
-	SendOtpResponse response=new SendOtpResponse();
-	response.setMessage(LoginConstants.OTP_SUCCESSFULL_MESSAGE);
-	return ResponseEntity.ok(response);
-	
-	
-}
-	
+	public ResponseEntity<SendOtpResponse> sendOtpHandler(@RequestBody VerificationOtpRequest request)
+			throws Exception {
+		authService.sendLoginOtp(request.getEmail());
+		SendOtpResponse response = new SendOtpResponse();
+		response.setMessage(LoginConstants.OTP_SUCCESSFULL_MESSAGE);
+		return ResponseEntity.ok(response);
+
+	}
+
 	@PostMapping("/signin-user")
-	public ResponseEntity<AuthResponse> userSignin(@RequestBody LoginRequest request) throws Exception{
-	AuthResponse response = authService.userSignin(request);
-	
-	return ResponseEntity.ok(response);
-	
-	
-}
+	public ResponseEntity<AuthResponse> userSignin(@RequestBody LoginRequest request) throws Exception {
+		AuthResponse response = authService.userSignin(request);
+
+		return ResponseEntity.ok(response);
+
+	}
 	@PostMapping("/save-user")
-	public ResponseEntity<String> userSignin(@RequestBody User request) throws Exception{
-	userRepository.save(request);
-	
-	return ResponseEntity.ok("save");
-	
-	
-}
-	
+ 	public ResponseEntity<String> userSignin(@RequestBody User request) throws Exception{
+ 	userRepository.save(request);
+ 	
+ 	return ResponseEntity.ok("save");
+ 	
+ 	
+ }
 }

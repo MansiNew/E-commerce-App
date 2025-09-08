@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.ecommerce")
 
 public class EcommerceWebsiteApplication {
 

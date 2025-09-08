@@ -1,10 +1,11 @@
 package com.ecommerce.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
@@ -14,6 +15,7 @@ public class VerificationCode {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long verificationId;
 	private String otp;
+	@Column(unique=true)
 	private String email;
 	@OneToOne
 	private Seller seller;

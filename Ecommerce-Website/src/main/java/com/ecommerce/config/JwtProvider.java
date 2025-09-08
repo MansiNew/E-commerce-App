@@ -30,7 +30,10 @@ public class JwtProvider {
 		// extract bareer keyword from actula jwt
 		jwt = jwt.substring(7);
 		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-		String email = String.valueOf(claims.get(claims.get("email")));
+		System.out.println("======+++++++++++++++++++++++++++++="+ claims);
+		//String email = String.valueOf(claims.get(claims.get("email")));
+		String email = String.valueOf(claims.get("email"));
+		System.out.println("======+++++++++++++++++++++++++++++="+  email+"  "+  jwt);
 		return email;
 	}
 

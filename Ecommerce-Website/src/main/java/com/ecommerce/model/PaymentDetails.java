@@ -1,9 +1,8 @@
 package com.ecommerce.model;
 
-import javax.persistence.Embeddable;
-
 import com.ecommerce.domain.PaymentStatus;
 
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 @Data

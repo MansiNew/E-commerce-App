@@ -2,9 +2,11 @@ package com.ecommerce.config;
 
 import java.util.Collections;
 
-import javax.servlet.Filter;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.Filter;
+import jakarta.servlet.http.HttpServletRequest;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,8 +29,8 @@ public class AppConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeRequests(authorize -> authorize.antMatchers("/api/**").authenticated()
-						.antMatchers("/api/products/*/reviews").permitAll().anyRequest().permitAll())
+				.authorizeRequests(authorize -> authorize.requestMatchers("/api/**").authenticated()
+						.requestMatchers("/api/products/*/reviews").permitAll().anyRequest().permitAll())
 				.addFilterBefore((Filter) new JwtTokenValidator(), BasicAuthenticationFilter.class)
 				.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource()));
 		// when connection frontend with backend browser will throwing cors exception
@@ -63,4 +65,6 @@ public class AppConfig {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+	
+	
 }

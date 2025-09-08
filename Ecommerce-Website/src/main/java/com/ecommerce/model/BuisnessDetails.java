@@ -1,11 +1,9 @@
 package com.ecommerce.model;
 
-import javax.persistence.Embeddable;
-
 import lombok.Data;
 
 @Data
-@Embeddable
+@jakarta.persistence.Embeddable
 public class BuisnessDetails {
 	private String buisnessName;
 	private String buisnessEmail;

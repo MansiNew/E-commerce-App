@@ -2,6 +2,8 @@ package com.ecommerce.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,8 +41,11 @@ public class CustomerServiceImpl implements UserDetailsService {
 			}
 
 		} else {
-			User user = userRepository.findByEmailId(username);
-			if (user != null) {
+			//User user = userRepository.findByEmailId(username);
+		User user = userRepository.findByEmailId(username);
+		System.out.println("========"+  user);
+			if (user!=null) {
+				System.out.println("====================================================");
 				return buildUserDetails(user.getEmailId(), user.getPassword(), user.getUserRole());
 			}
 		}
